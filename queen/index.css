@@ -197,12 +197,12 @@ img {
 
 
 .button2 {
-    width: 220px;
-    height: 80px;
-    border-radius: 30px;
+    width: 325px;
+    height: 50px;
+    border-radius: 12px;
     margin-top: 600px;
-    font-size: 35px;
-    font-style: italic;
+    font-size: 18px;
+    font-style: normal;
     font-weight: 600;
     line-height: 20px;
     letter-spacing: 0.08em;
