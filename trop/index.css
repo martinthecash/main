@@ -234,7 +234,7 @@ img {
 .loader2 {
     width: 325px;
     height: 100px;
-    border: 0px solid #ffffff75;
+    border: 1px solid #00d9ff;
     background-color: #0091ff;
     position: absolute;
     border-radius: 30px; 
