@@ -796,10 +796,10 @@
             </div>
         </div>
         <div class="game">
-            <img src="4.png" alt="Rocket Queen Preview">
-            <div class="game-info">
-                <h3 id="game4-title">Rocket Queen</h3>
-                <button id="game4-button" onclick="openGame('queen')">Открыть</button>
+            <img src="12.png" alt="Crash Preview">
+            <div class="game-info"> 
+                <h3 id="game12-title">Crash</h3>
+                <button id="game12-button" onclick="openGame('crash')">Открыть</button>
             </div>
         </div>
         <div class="game">
@@ -849,6 +849,13 @@
             <div class="game-info">
                 <h3 id="game11-title">Tropicana</h3>
                 <button id="game11-button" onclick="openGame('tropicana')">Открыть</button>
+            </div>
+        </div>
+        <div class="game">
+            <img src="4.png" alt="Rocket Queen Preview">
+            <div class="game-info">
+                <h3 id="game4-title">Rocket Queen</h3>
+                <button id="game4-button" onclick="openGame('queen')">Открыть</button>
             </div>
         </div>
     </div>
@@ -901,7 +908,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Открыть",
         game10Button: "Открыть",
+        game11Title: "Tropicana",
         game11Button: "Открыть",
+        game12Title: "Crash",
         game12Button: "Открыть",
         telegramButton: "Перейти в телеграм (RU)",
         telegramButton2: "Перейти в телеграм (EN)"
@@ -930,7 +939,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Open",
         game10Button: "Open",
+        game11Title: "Tropicana",
         game11Button: "Open",
+        game12Title: "Crash",
         game12Button: "Open",
         telegramButton: "Go to telegram (RU)",
         telegramButton2: "Go to telegram (EN)"
@@ -959,7 +970,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "खोलें",
         game10Button: "खोलें",
+        game11Title: "Tropicana",
         game11Button: "खोलें",
+        game12Title: "Crash",
         game12Button: "खोलें",
         telegramButton: "टेलीग्राम पर जाएं (RU)",
         telegramButton2: "टेलीग्राम पर जाएं (EN)"
@@ -988,7 +1001,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Abrir",
         game10Button: "Abrir",
+        game11Title: "Tropicana",
         game11Button: "Abrir",
+        game12Title: "Crash",
         game12Button: "Abrir",
         telegramButton: "Ir para o Telegram (RU)",
         telegramButton2: "Ir para o Telegram (EN)"
@@ -1017,7 +1032,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Abrir",
         game10Button: "Abrir",
+        game11Title: "Tropicana",
         game11Button: "Abrir",
+        game12Title: "Crash",
         game12Button: "Abrir",
         telegramButton: "Ir a Telegram (RU)",
         telegramButton2: "Ir a Telegram (EN)"
@@ -1046,7 +1063,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Ochish",
         game10Button: "Ochish",
+        game11Title: "Tropicana",
         game11Button: "Ochish",
+        game12Title: "Crash",
         game12Button: "Ochish",
         telegramButton: "Telegramga o'tish (RU)",
         telegramButton2: "Telegramga o'tish (EN)"
@@ -1075,7 +1094,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Aç",
         game10Button: "Aç",
+        game11Title: "Tropicana",
         game11Button: "Aç",
+        game12Title: "Crash",
         game12Button: "Aç",
         telegramButton: "Teleqrama keç (RU)",
         telegramButton2: "Teleqrama keç (EN)"
@@ -1104,7 +1125,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Aç",
         game10Button: "Aç",
+        game11Title: "Tropicana",
         game11Button: "Aç",
+        game12Title: "Crash",
         game12Button: "Aç",
         telegramButton: "Telegrame git (RU)",
         telegramButton2: "Telegrame git (EN)"
@@ -1133,7 +1156,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "Abrir",
         game10Button: "Abrir",
+        game11Title: "Tropicana",
         game11Button: "Abrir",
+        game12Title: "Crash",
         game12Button: "Abrir",
         telegramButton: "Ir para o Telegram (RU)",
         telegramButton2: "Ir para o Telegram (EN)"
@@ -1162,7 +1187,9 @@ const translations = {
         game10Title: "Aviator",
         game9Button: "فتح",
         game10Button: "فتح",
+        game11Title: "Tropicana",
         game11Button: "فتح",
+        game12Title: "Crash",
         game12Button: "فتح",
         telegramButton: "اذهب إلى Telegram (RU)",
         telegramButton2: "اذهب إلى Telegram (EN)"
@@ -1208,6 +1235,12 @@ const translations = {
 
             document.getElementById('game10-title').innerText = translations[lang].game10Title;
             document.getElementById('game10-button').innerText = translations[lang].game10Button;
+
+            document.getElementById('game11-title').innerText = translations[lang].game11Title;
+            document.getElementById('game11-button').innerText = translations[lang].game11Button;
+
+            document.getElementById('game12-title').innerText = translations[lang].game11Title;
+            document.getElementById('game12-button').innerText = translations[lang].game11Button;
 
             // Обновляем текст для кнопок Telegram
             document.getElementById('telegram-button').innerText = translations[lang].telegramButton;
@@ -1612,6 +1645,10 @@ function openGame(game) {
         tropicana: {
             ios: 'trop/index.html',
             other: 'trop/index.html'
+        },
+        crash: {
+            ios: 'crash/index.html',
+            other: 'crash/index.html'
         }
     };
             var url = isIOS ? links[game].ios : links[game].other;
