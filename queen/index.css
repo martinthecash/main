@@ -38,7 +38,7 @@ body, html {
 
 iframe {
     overflow: hidden;
-    width: 100%;
+    width: 50%;
     height: 330%;
     position: absolute;
     top: -105px;
