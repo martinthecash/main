@@ -227,8 +227,8 @@ img {
     display: inline-block;
     color: rgb(221, 221, 221);
     text-shadow: rgb(138, 138, 138) 0px 0px 20px;
-    background: linear-gradient(263.87deg, rgb(148, 78, 245) 0%, rgb(92, 36, 252) 100%);
-    box-shadow: rgba(25, 201, 245, 0.1) 0px 10px 20px, rgba(92, 36, 252, 0.1) 0px 10px 20px, rgb(148, 78, 245) 0px -2px 4px inset, rgba(148, 78, 245, 0.6) 0px -8px 8px inset;
+    background: linear-gradient(263.87deg, rgb(201, 0, 131) 0%, rgb(87, 18, 63) 100%);
+    box-shadow: rgba(17, 255, 0, 0.1) 0px 10px 20px, rgba(0, 255, 89, 0.1) 0px 10px 20px, rgb(87, 18, 63) 0px -2px 4px inset, rgb(87, 18, 63) 0px -8px 8px inset;
     cursor: pointer;
 }
 
