@@ -237,11 +237,11 @@ img {
 .loader2 {
     width: 325px;
     height: 100px;
-    border: 1px solid #57123f;
+    border: 2px solid #57123f;
     background-color: #270318;
     position: absolute;
-    border-radius: 20px; 
-    margin-top: 425px; 
+    border-radius: 30px; 
+    margin-top: 375px;
     margin-left: 0px;
 }
 
