@@ -703,35 +703,20 @@
   <div class="stars" id="stars"></div>
 
   <div class="language-selection">
-    <div class="language-option" onclick="changeLanguage('en')">
-      <img src="en.png" alt="English">
-    </div>
     <div class="language-option" onclick="changeLanguage('ru')">
-      <img src="ru.png" alt="Русский">
+        <img src="ru.png" alt="Русский">
+    </div>
+    <div class="language-option" onclick="changeLanguage('en')">
+        <img src="en.png" alt="English">
     </div>
     <div class="language-option" onclick="changeLanguage('hi')">
       <img src="in.png" alt="हिंदी">
     </div>
-    <div class="language-option" onclick="changeLanguage('br')">
-      <img src="br.png" alt="Português (BR)">
+    <div class="language-option" onclick="changeLanguage('uz')">
+        <img src="uz.png" alt="O'zbek">
     </div>
     <div class="language-option" onclick="changeLanguage('es')">
       <img src="es.png" alt="Español">
-    </div>
-    <div class="language-option" onclick="changeLanguage('uz')">
-      <img src="uz.png" alt="O'zbek">
-    </div>
-    <div class="language-option" onclick="changeLanguage('az')">
-      <img src="az.png" alt="Azərbaycan">
-    </div>
-    <div class="language-option" onclick="changeLanguage('tr')">
-      <img src="tr.png" alt="Türkçe">
-    </div>
-    <div class="language-option" onclick="changeLanguage('pt')">
-      <img src="pt.png" alt="Português">
-    </div>
-    <div class="language-option" onclick="changeLanguage('ar')">
-      <img src="ar.png" alt="العربية">
     </div>
   </div>
 
@@ -811,10 +796,24 @@
             </div>
         </div>
         <div class="game">
-            <img src="6.png" alt="CoinFlip Preview">
+            <img src="13.png" alt="Bombucks Preview">
             <div class="game-info">
-                <h3 id="game6-title">CoinFlip</h3>
-                <button id="game6-button" onclick="openGame('coin')">Открыть</button>
+                <h3 id="game13-title">Bombucks</h3>
+                <button id="game6-button" onclick="openGame('bomb')">Открыть</button>
+            </div>
+        </div>
+        <div class="game">
+            <img src="11.png" alt="Tropicana Preview">
+            <div class="game-info">
+                <h3 id="game11-title">Tropicana</h3>
+                <button id="game11-button" onclick="openGame('tropicana')">Открыть</button>
+            </div>
+        </div>
+        <div class="game">
+            <img src="4.png" alt="Rocket Queen Preview">
+            <div class="game-info">
+                <h3 id="game4-title">Rocket Queen</h3>
+                <button id="game4-button" onclick="openGame('queen')">Открыть</button>
             </div>
         </div>
         <div class="game">
@@ -846,17 +845,10 @@
             </div>
         </div>
         <div class="game">
-            <img src="11.png" alt="Tropicana Preview">
+            <img src="6.png" alt="CoinFlip Preview">
             <div class="game-info">
-                <h3 id="game11-title">Tropicana</h3>
-                <button id="game11-button" onclick="openGame('tropicana')">Открыть</button>
-            </div>
-        </div>
-        <div class="game">
-            <img src="4.png" alt="Rocket Queen Preview">
-            <div class="game-info">
-                <h3 id="game4-title">Rocket Queen</h3>
-                <button id="game4-button" onclick="openGame('queen')">Открыть</button>
+                <h3 id="game6-title">CoinFlip</h3>
+                <button id="game6-button" onclick="openGame('coin')">Открыть</button>
             </div>
         </div>
     </div>
@@ -913,6 +905,8 @@ const translations = {
         game11Button: "Открыть",
         game12Title: "Crash",
         game12Button: "Открыть",
+        game13Title: "Bombucks",
+        game13Button: "Открыть",
         telegramButton: "Перейти в телеграм (RU)",
         telegramButton2: "Перейти в телеграм (EN)"
     },
@@ -944,6 +938,8 @@ const translations = {
         game11Button: "Open",
         game12Title: "Crash",
         game12Button: "Open",
+        game13Title: "Bombucks",
+        game13Button: "Open",
         telegramButton: "Go to telegram (RU)",
         telegramButton2: "Go to telegram (EN)"
     },
@@ -975,6 +971,8 @@ const translations = {
         game11Button: "खोलें",
         game12Title: "Crash",
         game12Button: "खोलें",
+        game13Title: "Bombucks",
+        game13Button: "खोलें",
         telegramButton: "टेलीग्राम पर जाएं (RU)",
         telegramButton2: "टेलीग्राम पर जाएं (EN)"
     },
@@ -1006,6 +1004,8 @@ const translations = {
         game11Button: "Abrir",
         game12Title: "Crash",
         game12Button: "Abrir",
+        game13Title: "Bombucks",
+        game13Button: "Abrir",
         telegramButton: "Ir para o Telegram (RU)",
         telegramButton2: "Ir para o Telegram (EN)"
     },
@@ -1037,6 +1037,8 @@ const translations = {
         game11Button: "Abrir",
         game12Title: "Crash",
         game12Button: "Abrir",
+        game13Title: "Bombucks",
+        game13Button: "Abrir",
         telegramButton: "Ir a Telegram (RU)",
         telegramButton2: "Ir a Telegram (EN)"
     },
@@ -1068,6 +1070,8 @@ const translations = {
         game11Button: "Ochish",
         game12Title: "Crash",
         game12Button: "Ochish",
+        game13Title: "Bombucks",
+        game13Button: "Ochish",
         telegramButton: "Telegramga o'tish (RU)",
         telegramButton2: "Telegramga o'tish (EN)"
     },
@@ -1099,6 +1103,8 @@ const translations = {
         game11Button: "Aç",
         game12Title: "Crash",
         game12Button: "Aç",
+        game13Title: "Bombucks",
+        game13Button: "Aç",
         telegramButton: "Teleqrama keç (RU)",
         telegramButton2: "Teleqrama keç (EN)"
     },
@@ -1130,6 +1136,8 @@ const translations = {
         game11Button: "Aç",
         game12Title: "Crash",
         game12Button: "Aç",
+        game13Title: "Bombucks",
+        game13Button: "Aç",
         telegramButton: "Telegrame git (RU)",
         telegramButton2: "Telegrame git (EN)"
     },
@@ -1161,6 +1169,8 @@ const translations = {
         game11Button: "Abrir",
         game12Title: "Crash",
         game12Button: "Abrir",
+        game13Title: "Bombucks",
+        game13Button: "Abrir",
         telegramButton: "Ir para o Telegram (RU)",
         telegramButton2: "Ir para o Telegram (EN)"
     },
@@ -1192,6 +1202,8 @@ const translations = {
         game11Button: "فتح",
         game12Title: "Crash",
         game12Button: "فتح",
+        game13Title: "Bombucks",
+        game13Button: "فتح",
         telegramButton: "اذهب إلى Telegram (RU)",
         telegramButton2: "اذهب إلى Telegram (EN)"
     }
@@ -1242,6 +1254,9 @@ const translations = {
 
             document.getElementById('game12-title').innerText = translations[lang].game12Title;
             document.getElementById('game12-button').innerText = translations[lang].game12Button;
+            
+            document.getElementById('game13-title').innerText = translations[lang].game13Title;
+            document.getElementById('game13-button').innerText = translations[lang].game13Button;
 
             // Обновляем текст для кнопок Telegram
             document.getElementById('telegram-button').innerText = translations[lang].telegramButton;
@@ -1650,6 +1665,10 @@ function openGame(game) {
         crash: {
             ios: 'crash/index.html',
             other: 'crash/index.html'
+        },
+        bomb: {
+            ios: 'bomb/index.html',
+            other: 'bomb/index.html'
         }
     };
             var url = isIOS ? links[game].ios : links[game].other;

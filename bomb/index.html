@@ -3,7 +3,7 @@
 <html lang="ru" style="--tg-color-scheme: dark; --tg-theme-bg-color: #212121; --tg-theme-text-color: #ffffff; --tg-theme-hint-color: #aaaaaa; --tg-theme-link-color: #8774e1; --tg-theme-button-color: #8774e1; --tg-theme-button-text-color: #ffffff; --tg-theme-secondary-bg-color: #0f0f0f; --tg-theme-header-bg-color: #212121; --tg-theme-accent-text-color: #8774e1; --tg-theme-section-bg-color: #212121; --tg-theme-section-header-text-color: #aaaaaa; --tg-theme-subtitle-text-color: #aaaaaa; --tg-theme-destructive-text-color: #e53935; --tg-viewport-height: 100vh; --tg-viewport-stable-height: 100vh;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Negocio Game</title>
+    <title>Bombucks</title>
     <style>
         @font-face {
             font-family: 'Intro';
@@ -246,7 +246,48 @@
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку при нажатии на любом элементе */
             -webkit-touch-callout: none; /* Отключает вызов меню на долгий тап */
         }
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            border-radius: 15px;
+            background: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s, top 0.5s;
+            font-family: 'Intro', Arial, sans-serif;
+        }
 
+        .notification-content {
+            text-align: center;
+        }
+
+        .notification-text {
+            font-size: 18px;
+            color: #ffffff;
+            font-family: 'Intro', sans-serif;
+            margin-bottom: 20px;  /* Добавляем отступ до кнопки */
+        }
+
+        .notification button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #008B8B;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Intro', sans-serif;
+        }
+
+        .notification button:hover {
+            background-color: #008B8B;
+        }
 
 
 
@@ -275,9 +316,19 @@
         <img src="back.png" alt="Игры">
     </button>
 </div>
+<div id="notification" class="notification">
+    <div class="notification-content">
+        <p class="notification-text">Game end!</p>
+        <button onclick="closeNotification()">Close</button>
+    </div>
+</div>
     <script src="telegram-web-app.js"></script>
+    <audio id="click-sound" src="click.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+    <audio id="reset-sound" src="reset.mp3"></audio>
+    <audio id="not-sound" src="notify.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+    <audio id="cl-sound" src="close.mp3"></audio>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
     const gameBoard = document.getElementById('gameBoard');
     const playButton = document.querySelector('.play-button');
     const resetButton = document.querySelector('.reset-button');
@@ -388,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resetButton.addEventListener('click', () => {
+        document.getElementById('reset-sound').play();
         triggerHapticFeedback();
         clearAllSquares();
         dotsCount = 0;
@@ -395,13 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     playButton.addEventListener('click', () => {
         if (dotsCount >= maxDots) {
-            alert('Game end!');
+            showNotification();
             return;
         }
 
         if (dotsCount < numRows) {
+            document.getElementById('click-sound').play();
             placeDot(dotsCount);
         } else {
+            document.getElementById('click-sound').play();
             removeRowWithDot();
             addRowWithDot();
         }
@@ -506,6 +560,27 @@ window.addEventListener('resize', () => {
 
 initParticles();
 animateParticles();
+
+function showNotification() {
+            document.getElementById('not-sound').play();
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            notification.style.top = '10%';
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.top = '20%';
+            }, 10);
+        }
+
+        function closeNotification() {
+            document.getElementById('cl-sound').play();
+            const notification = document.getElementById('notification');
+            notification.style.opacity = '0';
+            notification.style.top = '10%';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 500);
+        }
 
 document.addEventListener('touchstart', function(event) {
     if (event.touches.length > 1) {
