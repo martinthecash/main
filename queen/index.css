@@ -228,7 +228,7 @@ img {
     color: rgb(221, 221, 221);
     text-shadow: rgb(138, 138, 138) 0px 0px 20px;
     background: linear-gradient(263.87deg, rgb(201, 0, 131) 0%, rgb(87, 18, 63) 100%);
-    box-shadow: rgba(17, 255, 0, 0.1) 0px 10px 20px, rgba(0, 255, 89, 0.1) 0px 10px 20px, rgb(87, 18, 63) 0px -2px 4px inset, rgb(87, 18, 63) 0px -8px 8px inset;
+    box-shadow: rgba(77, 5, 51, 0.664) 0px 10px 20px, rgba(77, 5, 51, 0.664) 0px 10px 20px, rgb(87, 18, 63) 0px -2px 4px inset, rgb(87, 18, 63) 0px -8px 8px inset;
     cursor: pointer;
 }
 
