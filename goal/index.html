@@ -512,6 +512,11 @@
         }
 
         resetButton.addEventListener('click', () => {
+        if (dotsCount < numRows) {
+            document.getElementById('reset-sound').play();
+        } else {
+            document.getElementById('reset-sound').play();
+        }
             triggerHapticFeedback();
             clearAllSquares();
             dotsCount = 0;

@@ -2,169 +2,230 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>goodwin</title>
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Royal Mines Game</title>
     <style>
         @font-face {
             font-family: 'Intro';
-            src: url('intro.otf') format('opentype'); /* Укажите правильный путь к файлу */
+            src: url('static/intro.otf') format('opentype');
         }
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-        }
-        body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('1.jpg'); /* Добавляем фон GIF */
-            background-size: cover; /* Растягиваем фон */
-            background-position: center; /* Центрируем фон */
-            background-repeat: no-repeat; /* Запрещаем повторение фона */
+            background-image: url('static/1.jpg'); /* Фоновое изображение */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        .container {
-            text-align: center;
-            margin-top: 20px;
+
+        /* Контейнер для кнопок */
+        .button-container {
+            display: flex;
+            justify-content: space-evenly; /* Более равномерное распределение кнопок */
+            align-items: center; /* Выравнивание кнопок по центру по вертикали */
+            margin-top: 10px; /* Уменьшаем верхний отступ */
+            margin-bottom: 10px; /* Уменьшаем нижний отступ */
+            width: 100%;
+            max-width: 400px; /* Ограничиваем максимальную ширину контейнера */
+            padding: 0 10px; /* Добавляем отступы по бокам */
+            transition: gap 0.3s; /* Плавный переход для gap */
         }
-        *, *::before, *::after {
+
+        button {
+            background-color: #5cbf47;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Intro', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #3da934;
+        }
+
+        button:active {
+            background-color: #3da934;
+        }
+
+        select {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #6fd060;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
             box-sizing: border-box;
         }
-         .game-board {
+
+        select:hover {
+            background-color: #5cbf47;
+        }
+
+        label {
+            font-family: 'Intro', sans-serif;
+            font-size: 18px;
+        }
+
+        .game-board {
             display: flex;
             flex-wrap: wrap;
-            width: 306px;
-            margin: 18px auto;
-            padding: 9px;
-            border-radius: 10.8px;
-            background-color: #f0f0f0;
-            box-shadow: 0 10.8px 21.6px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(120deg, #df0aff 0%, #66a6ff 50%, #89f7fe 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease-in-out infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 100% 50%;
-            }
-            50% {
-                background-position: 0% 50%;
-            }
+            margin: 10px auto;
+            min-height: 200px;
         }
 
+        .row {
+            display: flex;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s forwards ease-out;
+        }
 
-        @keyframes fadeInRow {
-            from {
-                opacity: 0;
-                transform: translateY(30px); /* Стартовая позиция немного ниже */
-            }
+        @keyframes slideIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .row {
+        .square {
+            margin: 5px;
+            background-color: #ced744;
+            transition: all 0.3s;
+            background: linear-gradient(145deg, #ced744, #b4c33a);
+            border-radius: 10px;
             display: flex;
-            width: 100%;
-            animation: fadeInRow 0.5s ease-out forwards; /* Применяем анимацию к каждой строке */
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            box-shadow: 0 0 0 4px #555555;
         }
 
-       .square {
+        .square img {
+            width: 80%;
+            height: 80%;
             opacity: 0;
-            width: 45px;
-            height: 45px;
-            background-color: #fff;
-            margin: 2.7px;
-            border-radius: 10.8px;
-            box-shadow: inset 0 0.9px 2.7px rgba(0, 0, 0, 0.2), 0 1.8px 3.6px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            animation: fadeInOpacity 0.5s forwards;
-        }
-        @keyframes fadeInOpacity {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .square.active {
-            transform: scale(1.12) translateY(-2px); /* Эта трансформация теперь не конфликтует */
-            transition: transform 0.5s ease; /* Переход только для трансформации */
-            background-image: linear-gradient(to top left, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 80%;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-        .square.dim {
-            opacity: 0.5; /* Затемнение неактивных квадратов */
-        }
-        .play-buttons-container {
-            display: flex;
-            justify-content: space-around;
-            width: 306px;
-            margin-top: 18px;
-        }
-        .reset-button, .play-button {
-            font-size: 14.4px;
-            font-weight: bold;
-            padding: 10.8px 21.6px;
-            width: 117px;
-            border-radius: 22.5px;
-            background: linear-gradient(145deg, #f6d365 0%, #fda085 100%);
-            box-shadow: 0 5.4px #d35400, 0 -5.4px #f6d365 inset;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .reset-button:hover, .play-button:hover {
-            background: linear-gradient(145deg, #fda085 0%, #f6d365 100%);
-            box-shadow: 0 8px #d35400, 0 -6px #f6d365 inset; /* Углубление тени при наведении */
-            transform: translateY(-3px);
-        }
-        .reset-button:active, .play-button:active {
-            box-shadow: 0 3px #d35400, 0 -3px #f6d365 inset; /* Сжатие при нажатии */
-            transform: translateY(2px);
-        }
-        .square.active {
-            background-image: url('step.svg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            transition: opacity 0.5s ease;
         }
 
-        .game-title {
-            font-family: 'Intro', Arial, sans-serif;
-            font-size: 3.15em;
-            font-weight: bold;
-            margin-bottom: 18px;
-            text-align: center;
-            background: -webkit-linear-gradient(120deg, #b400ff 0%, #4889e3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: float 6s infinite ease-in-out, backgroundShift 10s infinite linear;
+        .square.active img {
+            opacity: 1;
         }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
+        .tab {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
+    border-radius: 50px;
+    height: 70px; /* Фиксированная высота для десктопа */
+}
 
+.tab button {
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex: 1 0 auto;
+    margin: 0 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: 0.3s;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    font-size: 16px;
+    font-family: 'Intro', Arial, sans-serif;
+}
+
+.tab button img {
+    max-width: 38px;
+    height: 38px;
+}
+
+.tab button:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.tab button.active {
+    background-color: #666;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Медиазапросы для адаптации на мобильных устройствах */
+@media (max-width: 768px) {
+    .tab {
+        height: 70px; /* Фиксированная высота для планшетов */
+    }
+
+    .tab button {
+        margin: 0 5px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .tab button img {
+        max-width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab {
+        height: 70px; /* Фиксированная высота для мобильных устройств */
+    }
+
+
+    .tab button {
+        margin: 0 3px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .tab button img {
+        max-width: 28px;
+        height: 28px;
+    }
+}
 
         .notification {
             display: none;
             position: fixed;
             top: 20%;
             left: 50%;
+            width: 200px; /* Задайте нужную ширину */
+            height: 100px; /* Задайте нужную высоту */
             transform: translateX(-50%);
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
-            background: #ffffff;
+            background: #333;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 1000;
             opacity: 0;
@@ -173,22 +234,28 @@
         }
 
         .notification-content {
+            display: flex;
+            flex-direction: column; /* Вертикальное выравнивание */
+            align-items: center;    /* Центрирование по горизонтали */
+            justify-content: center; /* Центрирование по вертикали (если высота фиксированная) */
             text-align: center;
         }
 
         .notification-text {
             font-size: 18px;
-            color: #333;
+            color: #ffffff;
             font-family: 'Intro', sans-serif;
             margin-bottom: 20px;  /* Добавляем отступ до кнопки */
         }
 
         .notification button {
+            width: 200px; /* Задайте нужную ширину */
+            height: 35px; /* Задайте нужную высоту */
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 10px;
-            background-color: #66a6ff;
+            background-color: #6fd060;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -196,183 +263,49 @@
         }
 
         .notification button:hover {
-            background-color: #5591cc;
+            background-color: #5cbf47;
         }
-         #video-background {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-            background-size: cover;
-        }
-        .reset-button.button-pressed, .play-button.button-pressed {
-            box-shadow: 0 3px #d35400, 0 -3px #f6d365 inset; /* Сжатие при нажатии */
-            transform: translateY(2px);
-        }
-        .return-button {
-            font-size: 14.4px;
-            font-weight: bold;
-            padding: 10.8px 0; /* Уменьшение padding справа и слева */
-            width: 150px; /* Увеличение ширины для центрирования текста */
-            border-radius: 22.5px;
-            background: linear-gradient(145deg, #f6d365 0%, #fda085 100%);
-            box-shadow: 0 5.4px #d35400, 0 -5.4px #f6d365 inset;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 18px; /* Отступ сверху для разделения кнопок */
-            font-family: 'Intro', Arial, sans-serif;
-            text-align: center; /* Центрирование текста */
-        }
-        .return-button:hover {
-            background: linear-gradient(145deg, #fda085 0%, #f6d365 100%);
-            box-shadow: 0 8px #d35400, 0 -6px #f6d365 inset;
-            transform: translateY(-3px);
-        }
-        .return-button:active {
-            box-shadow: 0 3px #d35400, 0 -3px #f6d365 inset;
-            transform: translateY(2px);
-        }
-        .return-button.button-pressed {
-            box-shadow: 0 3px #d35400, 0 -3px #f6d365 inset;
-            transform: translateY(2px);
-        }
-
-
-
     </style>
 </head>
 <body>
+    <div>
+        <select id="fieldSelect">
+            <option value="6x15">6x15</option>
+            <option value="3x6">3x6</option>
+            <option value="2x3">2x3</option>
+            <option value="4x9">4x9</option>
+            <option value="5x12">5x12</option>
+        </select>
+    </div>
 
     <div class="game-board" id="gameBoard"></div>
-    <div class="play-buttons-container">
-        <button class="reset-button">
-            <img src="pere.png" alt="Pere icon" style="width: 100%; height: 100%;">
-        </button>
-        <button class="play-button">
-            <img src="play.png" alt="Play icon" style="width: 80%; height: 80%;">
-        </button>
+
+    <!-- Контейнер для кнопок play и reset -->
+    <div class="button-container" id="buttonContainer">
+        <button class="play-button">PLAY</button>
+        <button class="reset-button">RESET</button>
+        <div class="tab">
+            <button class="tablinks games-icon" data-tab="Games" onclick="window.location.href=&#39;https://martinthecash.github.io/main/&#39;;">
+                <img src="back.png" alt="Игры">
+            </button>
+        </div>
+    <!-- Уведомление -->  
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <p class="notification-text">Game end!</p>
+            <button onclick="closeNotification()">Close</button>
+        </div>
     </div>
-    <button class="return-button" onclick="location.href='https://martinthecash.github.io/main/'">Back</button>
- <div id="notification" class="notification">
-    <div class="notification-content">
-        <p class="notification-text">Game end!</p>
-        <button onclick="closeNotification()">Close</button>
-    </div>
-</div>
-    <audio id="click-sound" src="click.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
-    <audio id="reset-sound" src="reset.mp3"></audio>
-    <audio id="not-sound" src="notify.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
-    <audio id="cl-sound" src="close.mp3"></audio>
+        <script src="telegram-web-app.js"></script>
+        <audio id="click-sound" src="click.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+        <audio id="reset-sound" src="reset.mp3"></audio>
+        <audio id="not-sound" src="notify.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+        <audio id="cl-sound" src="close.mp3"></audio>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const gameBoard = document.getElementById('gameBoard');
-            const resetButton = document.querySelector('.reset-button');
-            const playButton = document.querySelector('.play-button');
-            let dotsCount = 0;
-            let numRows = 8;
 
-            function initializeBoard() {
-                gameBoard.innerHTML = '';
-                for (let i = 0; i < numRows; i++) {
-                    const newRow = document.createElement('div');
-                    newRow.className = 'row';
-                    for (let j = 0; j < 6; j++) {
-                        const newSquare = document.createElement('div');
-                        newSquare.className = 'square';
-                        newRow.appendChild(newSquare);
-                    }
-                    gameBoard.appendChild(newRow);
-                }
-            }
-
-            resetButton.addEventListener('click', () => {
-                document.getElementById('reset-sound').play();
-                clearAllSquares();
-                dotsCount = 0;
-            });
-
-            playButton.addEventListener('click', () => {
-                if (dotsCount >= 15) {
-                    showNotification();
-                    return;
-                }
-
-                if (dotsCount < numRows) {
-                    document.getElementById('click-sound').play();
-                    placeDot(dotsCount);
-                } else {
-                    document.getElementById('click-sound').play();
-                    removeRowWithDot();
-                    addRowWithDot();
-                }
-                dotsCount++;
-                maintainRowCount();
-            });
-
-            function placeDot(rowNumber) {
-                const rows = Array.from(gameBoard.querySelectorAll('.row'));
-                const squares = rows[numRows - 1 - rowNumber].querySelectorAll('.square');
-                const randomSquare = Math.floor(Math.random() * squares.length);
-                squares[randomSquare].classList.add('active');
-                setTimeout(() => {
-                    squares[randomSquare].style.opacity = '1'; // Убедитесь, что это свойство управляется CSS
-                }, 100); // Задержка для начала анимации
-            }
-
-
-            function addRowWithDot() {
-                const newRow = document.createElement('div');
-                newRow.className = 'row';
-                for (let i = 0; i < 6; i++) {
-                    const newSquare = document.createElement('div');
-                    newSquare.className = 'square';
-                    newRow.appendChild(newSquare);
-                }
-                gameBoard.insertBefore(newRow, gameBoard.firstChild);
-                placeDotInNewRow(newRow);
-            }
-
-            function placeDotInNewRow(newRow) {
-                const squares = newRow.querySelectorAll('.square');
-                const randomSquare = Math.floor(Math.random() * squares.length);
-                squares[randomSquare].classList.add('active');
-            }
-
-            function removeRowWithDot() {
-                gameBoard.removeChild(gameBoard.lastChild);
-            }
-
-            function maintainRowCount() {
-                while (gameBoard.children.length > numRows) {
-                    gameBoard.removeChild(gameBoard.lastChild);
-                }
-            }
-
-            function clearAllSquares() {
-                const squares = gameBoard.querySelectorAll('.square');
-                squares.forEach(square => square.classList.remove('active'));
-            }
-
-            function adjustOrientation() {
-                if (window.matchMedia('(min-aspect-ratio: 16/9)').matches) {
-                    numRows = 8;
-                } else {
-                    numRows = 5;
-                }
-                initializeBoard();
-                clearAllSquares();
-                dotsCount = 0;
-            }
-
-            window.addEventListener('resize', adjustOrientation);
-            adjustOrientation();
-        });
-      function showNotification() {
+        function showNotification() {
             document.getElementById('not-sound').play();
             const notification = document.getElementById('notification');
             notification.style.display = 'block';
@@ -392,19 +325,220 @@
                 notification.style.display = 'none';
             }, 500);
         }
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.reset-button, .play-button');
+        
+    document.addEventListener('DOMContentLoaded', () => {
+        const gameBoard = document.getElementById('gameBoard');
+        const playButton = document.querySelector('.play-button');
+        const resetButton = document.querySelector('.reset-button');
+        const fieldSelect = document.getElementById('fieldSelect');
+        const buttonContainer = document.getElementById('buttonContainer');
+        let dotsCount = 0;
+        let numRows = 5;
+        let numCols = 6;
+        let maxDots = 15;
+        let squareSize = 52;
 
-            buttons.forEach(button => {
-                button.addEventListener('touchstart', () => {
-                    button.classList.add('button-pressed');
-                });
-                button.addEventListener('touchend', () => {
-                    button.classList.remove('button-pressed');
-                });
-            });
+        function initializeBoard() {
+            gameBoard.innerHTML = '';
+            for (let i = 0; i < numRows; i++) {
+                const newRow = document.createElement('div');
+                newRow.className = 'row';
+                for (let j = 0; j < numCols; j++) {
+                    const newSquare = document.createElement('div');
+                    newSquare.className = 'square';
+                    newSquare.style.width = `${squareSize}px`;
+                    newSquare.style.height = `${squareSize}px`;
+
+                    const img = document.createElement('img');
+                    img.src = 'static/royalstep.svg'; // путь к изображению
+                    newSquare.appendChild(img);
+
+                    newRow.appendChild(newSquare);
+                }
+                gameBoard.appendChild(newRow);
+            }
+            updateSelectAndButtonWidth();
+        }
+
+        function triggerHapticFeedback() {
+            if (window.Telegram && window.Telegram.WebApp.HapticFeedback) {
+                window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+            }
+        }
+
+        function updateBoardSize() {
+            triggerHapticFeedback();
+            const rowWidth = squareSize * numCols + (numCols - 1) * 2.7;
+            gameBoard.style.width = `${rowWidth}px`;
+            buttonContainer.style.width = `${rowWidth}px`; // Устанавливаем ширину контейнера для кнопок
+            updateSelectAndButtonWidth();
+            updateButtonContainerGap(); // Изменяем расстояние между кнопками
+        }
+
+        function updateButtonContainerGap() {
+            const selectedField = fieldSelect.value;
+            let gapValue;
+            if (selectedField === "6x15" || selectedField === "5x12") {
+                gapValue = '5px'; // Для этих полей минимальное расстояние
+            } else if (selectedField === "4x9") {
+                gapValue = '10px'; // Среднее расстояние для 4x9
+            } else if (selectedField === "2x3" || selectedField === "3x6") {
+                gapValue = '5px'; // Минимальное расстояние для маленьких полей
+            } else {
+                gapValue = '20px'; // По умолчанию
+            }
+            buttonContainer.style.gap = gapValue;
+        }
+
+        function updateSelectAndButtonWidth() {
+            const firstRow = gameBoard.querySelector('.row');
+            if (firstRow) {
+                const firstRowWidth = firstRow.offsetWidth;
+                fieldSelect.style.width = `${firstRowWidth}px`;
+            }
+        }
+
+        function placeDot(rowNumber) {
+            triggerHapticFeedback();
+            const rows = Array.from(gameBoard.querySelectorAll('.row'));
+            const squares = rows[numRows - 1 - rowNumber].querySelectorAll('.square');
+            const randomSquare = Math.floor(Math.random() * squares.length);
+
+            const img = squares[randomSquare].querySelector('img');
+            squares[randomSquare].classList.add('active');
+        }
+
+        function addRowWithDot() {
+            triggerHapticFeedback();
+            const newRow = document.createElement('div');
+            newRow.className = 'row';
+            for (let i = 0; i < numCols; i++) {
+                const newSquare = document.createElement('div');
+                newSquare.className = 'square';
+                newSquare.style.width = `${squareSize}px`;
+                newSquare.style.height = `${squareSize}px`;
+
+                const img = document.createElement('img');
+                img.src = 'static/royalstep.svg';
+                newSquare.appendChild(img);
+
+                newRow.appendChild(newSquare);
+            }
+            gameBoard.insertBefore(newRow, gameBoard.firstChild);
+            placeDotInNewRow(newRow);
+            updateSelectAndButtonWidth();
+        }
+
+        function placeDotInNewRow(newRow) {
+            const squares = newRow.querySelectorAll('.square');
+            const randomSquare = Math.floor(Math.random() * squares.length);
+
+            const img = squares[randomSquare].querySelector('img');
+            squares[randomSquare].classList.add('active');
+        }
+
+        function removeRowWithDot() {
+            gameBoard.removeChild(gameBoard.lastChild);
+            updateSelectAndButtonWidth();
+        }
+
+        function maintainRowCount() {
+            while (gameBoard.children.length > numRows) {
+                gameBoard.removeChild(gameBoard.lastChild);
+            }
+        }
+
+        function clearAllSquares() {
+            const squares = gameBoard.querySelectorAll('.square');
+            squares.forEach(square => square.classList.remove('active'));
+        }
+
+        resetButton.addEventListener('click', () => {
+        if (dotsCount < numRows) {
+            document.getElementById('reset-sound').play();
+        } else {
+            document.getElementById('reset-sound').play();
+        }
+            triggerHapticFeedback();
+            clearAllSquares();
+            dotsCount = 0;
+            
         });
 
+
+        playButton.addEventListener('click', () => {
+        if (dotsCount >= maxDots) {
+            showNotification();
+            return;
+        }
+
+        if (dotsCount < numRows) {
+            document.getElementById('click-sound').play();
+            placeDot(dotsCount);
+        } else {
+            document.getElementById('click-sound').play();
+            removeRowWithDot();
+            addRowWithDot();
+        }
+        dotsCount++;
+        maintainRowCount();
+    });
+        fieldSelect.addEventListener('change', () => {
+            const selectedField = fieldSelect.value;
+            if (selectedField === "6x15") {
+                numRows = 5;
+                numCols = 6;
+                maxDots = 15;
+                squareSize = 52;
+            } else if (selectedField === "3x6") {
+                numRows = 3;
+                numCols = 3;
+                maxDots = 6;
+                squareSize = 70;
+            } else if (selectedField === "2x3") {
+                numRows = 2;
+                numCols = 2;
+                maxDots = 3;
+                squareSize = 90;
+            } else if (selectedField === "4x9") {
+                numRows = 4;
+                numCols = 4;
+                maxDots = 9;
+                squareSize = 65;
+            } else if (selectedField === "5x12") {
+                numRows = 5;
+                numCols = 5;
+                maxDots = 12;
+                squareSize = 60;
+            }
+            initializeBoard();
+            updateBoardSize();
+            clearAllSquares();
+            dotsCount = 0;
+        });
+
+        window.addEventListener('resize', () => {
+            updateBoardSize();
+        });
+
+        initializeBoard();
+        updateBoardSize();
+    });
+
+    document.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
     </script>
 </body>
 </html>
